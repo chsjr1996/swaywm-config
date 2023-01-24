@@ -1,6 +1,6 @@
 #!/bin/sh
 
-background_img=$HOME/Pictures/Abstract/kay/dark/3840x2160_lock.png
+background_img=$HOME/.config/sway/assets/wallpaper_lock.png
 
 alpha='dd'
 background='#282a36'
