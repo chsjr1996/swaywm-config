@@ -1,12 +1,13 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Roboto, 'FontAwesome 6 Free Solid', Helvetica, Arial, sans-serif;
+    font-family: 'Inter', 'FontAwesome 6 Free Solid', Helvetica, Arial, sans-serif;
     font-size: 13px;
 }
 
 window#waybar {
     /* background-color: #282a36; */
-    background-color: transparent;
+    border-top: 2px solid #44CF6E;
+    background-color: #000000;
     border-radius: 0;
     color: #ffffff;
     transition-property: background-color;
@@ -60,7 +61,7 @@ button:hover {
 }
 
 #workspaces button.focused {
-    color: #bd93f9;
+    color: #44CF6E;
 }
 
 #workspaces button.urgent {
@@ -68,10 +69,11 @@ button:hover {
 }
 
 #mode {
-    background-color: #6272a4;
-    margin: 5px;
-    border-radius: 5px;
-    border-bottom: 3px solid #bd93f9;
+    background-color: #44CF6E;
+    color: #000000;
+    padding: 5px;
+    font-style: normal;
+    font-weight: bold;
 }
 
 #clock,
@@ -86,7 +88,6 @@ button:hover {
 #wireplumber,
 #custom-media,
 #tray,
-#mode,
 #idle_inhibitor,
 #scratchpad,
 #mpd {
@@ -110,30 +111,27 @@ button:hover {
 }
 
 #clock {
-    background-color: transparent;
+    background-color: #44CF6E;
+    color: black;
     font-weight: bold;
 }
 
-#battery {}
-
-#battery.discharging {
-  color: #ffb86c;
-}
-
-#battery.charging, #battery.plugged {
-  color: #f1fa8c;
+#battery {
+  color: #44CF6E;
 }
 
 @keyframes blink {
     to {
         background-color: #ffffff;
         color: #000000;
+        background-color: #44CF6E;
+        color: black;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+    background-color: transparent;
+    color: #44CF6E;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -147,45 +145,29 @@ label:focus {
 
 #cpu {
   background-color: transparent;
-}
-
-#cpu.high {
-  color: #f1fa8c;
-}
-
-#cpu.warning {
-  color: #ffb86c;
-}
-
-#cpu.critical {
-  color: #ff5555;
+  color: #44CF6E;
 }
 
 #memory {
   background-color: transparent;
+  color: #44CF6E;
 }
 
-#memory.high {
-  color: #f1fa8c;
+#disk {
+  color: #44CF6E;
 }
-
-#memory.warning {
-  color: #ffb86c;
-}
-
-#memory.critical {
-  color: #ff5555;
-}
-
-#disk {}
 
 #backlight {}
 
-#network {}
+#network {
+  color: #44CF6E;
+}
 
 #network.disconnected {}
 
-#pulseaudio {}
+#pulseaudio {
+  color: #44CF6E;
+}
 
 #pulseaudio.muted {}
 
@@ -201,7 +183,9 @@ label:focus {
 
 #custom-media.custom-vlc {}
 
-#temperature {}
+#temperature {
+  color: #44CF6E;
+}
 
 #temperature.critical {}
 
@@ -236,8 +220,24 @@ label:focus {
     background: rgba(0, 0, 0, 0.2);
 }
 
-#scratchpad {}
+#scratchpad {
+  color: #44CF6E;
+}
 
 #scratchpad.empty {
 	background-color: transparent;
+}
+
+#power-profiles-daemon  {
+  border-top: 2px solid #43CF6E;
+  background-color: black;
+  color: #44CF6E;
+  min-width: 30px;
+}
+
+#custom-notification {
+  border-top: 2px solid #43CF6E;
+  background-color: black;
+  color: #44CF6E;
+  min-width: 40px;
 }

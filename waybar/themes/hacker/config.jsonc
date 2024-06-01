@@ -6,9 +6,28 @@
     "spacing": 4, // Gaps between modules (4px)
     "margin": "0 0 0 0", // Margin between bar and screen
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/scratchpad", "sway/mode"],
+    "modules-left": [
+      "sway/workspaces",
+      "sway/scratchpad",
+      "sway/mode"
+    ],
     "modules-center": [],
-    "modules-right": ["tray", "idle_inhibitor", "network", "cpu", "memory", "battery#bat2", "pulseaudio#output", "pulseaudio#input", "battery", "clock"],
+    "modules-right": [
+      "tray",
+      // "idle_inhibitor",
+      "custom/notification",
+      "pulseaudio#output",
+      "pulseaudio#input",
+      "network", 
+      "disk",
+      "temperature",
+      "cpu",
+      "memory",
+      "power-profiles-daemon",
+      "battery",
+      "battery#bat2",
+      "clock"
+    ],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": true,
@@ -18,20 +37,11 @@
             "urgent": "",
             "default": ""
         },
-        "persistent_workspaces": {
+        "persistent-workspaces": {
             "1": [],
             "2": [],
             "3": [],
             "4": []
-        }
-    },
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
         }
     },
     "sway/mode": {
@@ -59,19 +69,44 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+          "default": "",
+          "performance": "",
+          "balanced": "",
+          "power-saver": ""
+        }
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
     "cpu": {
-        "format": "",
+        "format": "{usage}% ",
         "tooltip-format": "{usage}%",
-        "on-click": "alacritty -e btop",
+        "on-click": "foot -- btop",
         "states": {
             "high": 35,
             "warning": 50,
             "critical": 71
         }
     },
+    "disk": {
+        "interval": 30,
+        "format": "{free} ",
+        "unit": "GB"
+        // 0.25 GB out of 2000.00 GB available. Alternatively 241.3MiB out of 1.9TiB available.
+    },
     "memory": {
-        "format": "",
-        "on-click": "alacritty -e btop",
+        "format": "{used}GB ",
+        "on-click": "foot -- btop",
         "states": {
             "high": 35,
             "warning": 50,
@@ -83,7 +118,7 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}",
+        "format": "{capacity}% {icon}",
         "format-alt": "{time} {capacity}% {icon}",
         "format-icons": ["", "", "", "", ""],
         "on-scroll-down": "light -U 5",
@@ -102,7 +137,7 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio#output": {
-        "format": "{icon}",
+        "format": "{volume}% {icon}",
         "format-muted": "",
         "format-icons": {
             "default": ["", "", ""]
@@ -130,6 +165,26 @@
         "escape": true,
         // "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+          "notification": "<span foreground='red'><sup></sup></span>",
+          "none": "",
+          "dnd-notification": "<span foreground='red'><sup></sup></span>",
+          "dnd-none": "",
+          "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+          "inhibited-none": "",
+          "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+          "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     }
 }
 
